@@ -31,6 +31,7 @@ public class ObjectSlicer : MonoBehaviour
     void Slice(GameObject target, Vector3 planePosition, Vector3 slicerVelocity)
     {
         Debug.Log("Object Sliced");
+        AudioManager.instance.Play("SwordHit");
         Vector3 slicingDirection = endSlicingPoint.position - startSlicingPoint.position;
         Vector3 planeNormal = Vector3.Cross(slicerVelocity, slicingDirection);
         SlicedHull hull = target.Slice(planePosition, planeNormal);

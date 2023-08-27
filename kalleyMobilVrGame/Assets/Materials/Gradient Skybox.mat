@@ -28,9 +28,9 @@ Material:
     - _BottomExponent: 5.84
     - _DirectionPitch: 0
     - _DirectionYaw: 0
-    - _Exponent: 1.63
+    - _Exponent: 1.8
     - _Exposure: 1.19
-    - _Intensity: 1.34
+    - _Intensity: 0.465
     - _SunDisk: 0
     - _SunSize: 0
     - _SunSizeConvergence: 5
