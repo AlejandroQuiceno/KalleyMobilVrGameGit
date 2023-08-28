@@ -10,19 +10,17 @@ public class UIAnimationScript : MonoBehaviour
     public float duration;
     public Ease ease;
     public float positionOffset = 600;
-    public RectTransform[] rectTransforms;
+    //public RectTransform[] rectTransforms;
     [SerializeField] AnimationDirection animationDirectionIn = AnimationDirection.Up;
     [SerializeField] AnimationDirection animationDirectionOut = AnimationDirection.Down;
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-        rectTransforms = GetComponentsInChildren<RectTransform>();
+        //rectTransforms = GetComponentsInChildren<RectTransform>();
     }
     private void Start()
     {
         canvasGroup.alpha = 0;
-        Invoke("AnimateIn", 3);
-        Invoke("AnimateOut", 8);
     }
     public void AnimateIn()
     {
@@ -41,17 +39,16 @@ public class UIAnimationScript : MonoBehaviour
         }
         else if (animationDirectionIn == AnimationDirection.Up)
         {
-            anchoredPosition.y = groupRect.anchoredPosition.x + positionOffset;
+            anchoredPosition.y = groupRect.anchoredPosition.y + positionOffset;
             anchoredPosition.x = 0;
         }
         else if (animationDirectionIn == AnimationDirection.Down)
         {
-            anchoredPosition.y = groupRect.anchoredPosition.x + positionOffset;
+            anchoredPosition.y = groupRect.anchoredPosition.y + positionOffset;
             anchoredPosition.x = 0;
         }
         groupRect.position = anchoredPosition;
-        Debug.Log(anchoredPosition);
-        AnimateChildrenIn(anchoredPosition);
+        //AnimateChildrenIn(anchoredPosition);
         groupRect.DOLocalMove( Vector2.zero, duration).SetEase(ease);
         canvasGroup.DOFade(1, duration - 0.5f).SetEase(ease);
     }
@@ -79,10 +76,11 @@ public class UIAnimationScript : MonoBehaviour
             anchoredPosition.y = groupRect.anchoredPosition.x + positionOffset;
             anchoredPosition.x = 0;
         }
-        AnimateChildrenOut(anchoredPosition);
+        //AnimateChildrenOut(anchoredPosition);
         groupRect.DOLocalMove(anchoredPosition, duration).SetEase(ease);
         canvasGroup.DOFade(0, duration - 0.5f).SetEase(ease);
     }
+    /*
     private  void AnimateChildrenIn(Vector2 anchoredPosition)
     {
         RectTransform[] tempAnchorPos = rectTransforms;
@@ -101,6 +99,7 @@ public class UIAnimationScript : MonoBehaviour
             rectTransforms[i].DOLocalMove(tempAnchorPos[i].anchoredPosition + anchoredPosition, duration + (i + 2) / 10);
         }
     }
+    */
 }
 public enum AnimationDirection
 {

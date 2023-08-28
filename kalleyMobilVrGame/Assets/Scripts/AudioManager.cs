@@ -2,7 +2,6 @@ using UnityEngine.Audio;
 using System;
 using UnityEngine;
 
-//Credit to Brackeys youtube tutorial on Audio managers, as the majority of this code and learning how to use it was made by him.
 [System.Serializable]
 public class Sound
 {

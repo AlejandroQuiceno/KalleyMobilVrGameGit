@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EzySlice;
 using UnityEngine.Networking;
+using JetBrains.Annotations;
 
 public class ObjectSlicer : MonoBehaviour
 {
@@ -12,12 +13,10 @@ public class ObjectSlicer : MonoBehaviour
     public Transform endSlicingPoint;
     public LayerMask slacebleLayer;
     public VelocityEstimator velocityEstimator;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    public delegate void BoxHitDelegate(int boxCount,float volume);
+    public event BoxHitDelegate OnBoxHit;
+    private int boxCount;
     void Update()
     {
         RaycastHit hit;
@@ -32,6 +31,8 @@ public class ObjectSlicer : MonoBehaviour
     {
         Debug.Log("Object Sliced");
         AudioManager.instance.Play("SwordHit");
+        boxCount++;
+        OnBoxHit?.Invoke(boxCount,1);
         Vector3 slicingDirection = endSlicingPoint.position - startSlicingPoint.position;
         Vector3 planeNormal = Vector3.Cross(slicerVelocity, slicingDirection);
         SlicedHull hull = target.Slice(planePosition, planeNormal);
