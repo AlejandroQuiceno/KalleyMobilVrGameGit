@@ -1,25 +1,32 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class SlicedBoxesController : MonoBehaviour
 {
     private ObjectSlicer objectSlicer;
+    private int boxesSliced;
+
+    public int BoxesSliced { get => boxesSliced; }
+
     private void Awake()
     {
         objectSlicer = GetComponentInChildren<ObjectSlicer>();
     }
     private void Start()
     {
-        objectSlicer.OnBoxHit += BoxSclice;
+        objectSlicer.OnBoxHit += CheckScore;
     }
-    public void BoxSclice(int boxCount, float volume)
+    public void CheckScore(float hullVolume,Vector3 hullPosition,BoxColor boxColor)
     {
-        if (boxCount == 1)
+        boxesSliced++;
+        if (boxesSliced == 1)
         {
             GameManager.GetInstance().FirstBoxHit= true;
             AudioManager.instance.Play("SlowMotionOut");
             Time.timeScale = 1f;
         }
+        UIManager.GetInstance().InstantiateScore(hullVolume, hullPosition, boxColor);
     }
 }

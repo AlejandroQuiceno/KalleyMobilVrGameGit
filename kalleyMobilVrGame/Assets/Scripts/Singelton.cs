@@ -15,7 +15,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             Destroy(FindObjectOfType<T>());
         }
-        DontDestroyOnLoad(instance.gameObject);
         return instance;
     }
 }
