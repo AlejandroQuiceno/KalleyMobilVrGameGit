@@ -13,7 +13,7 @@ public class SpawnerScript : MonoBehaviour
     public Transform[] SpawnPoints;
     public float spawnTimer = 2;
     float initialSpwanTimer;
-
+    [SerializeField] List<BoxColor> randomColorsList = new List<BoxColor>();
 
     [Range(0, 3)]
     [SerializeField] float randomTargetOffset;
@@ -47,7 +47,7 @@ public class SpawnerScript : MonoBehaviour
         }
         if (answers > 3)
         {
-            colors[2] = BoxColor.Blue;
+            colors[3] = BoxColor.Blue;
         }
         StartCoroutine(Spawning(colors, boxes));
     }
@@ -66,23 +66,45 @@ public class SpawnerScript : MonoBehaviour
         yield return new WaitForSeconds(initialSpwanTimer);
         QuestionManager questionManager = QuestionManager.GetInstance();
         GameManager gameManager = GameManager.GetInstance();
-        List <BoxColor> randomColorsList = new List<BoxColor>();
-        List<BoxColor> incorrectColots = new List<BoxColor>();
+        randomColorsList = new List<BoxColor>();
+        int boxesPerAnswer;
+        int coloBoxIndex = 0;
+        if (colors.Length == 2)
+        {
+            boxesPerAnswer = boxesToSpawn/2;
+            for(int i =0;i<boxesToSpawn;i++) {
+                if (i % boxesPerAnswer == 0 && i !=0) coloBoxIndex++;
+                randomColorsList.Add(colors[coloBoxIndex]);
+            }
+        }
+        else if (colors.Length == 4)
+        {
+            boxesPerAnswer = boxesToSpawn / 4;
+            for (int i = 0; i < boxesToSpawn; i++)
+            {
+                if (i % boxesPerAnswer == 0 && i != 0) coloBoxIndex++;
+               randomColorsList.Add(colors[coloBoxIndex]);
+            }
+        }
+        /*
         for(int i = 0; i < boxesToSpawn; i++)
         {
+ 
             if (i <= 5 && gameManager.CurrentGameState == GameState.Question)
             {
-                int radomCorrectColorIndex = Random.Range(0, questionManager.GetQuestion().correctColors.Count);
+                int radomCorrectColorIndex = Random.Range(0, questionManager.GetQuestion().correctColors.Count);//spawnea al menos 5 de los colores correctos
                 randomColorsList.Add(questionManager.GetQuestion().correctColors[radomCorrectColorIndex]);
             }
             else
             {
-                int randomIndex = Random.Range(0, colors.Length);
+                int randomIndex = Random.Range(0, colors.Length);//luego llena la lista con colores aleatorios, pueden ser correctos o incorrectos
                 randomColorsList.Add(colors[randomIndex]);
             }
         }
-        ListRandomizer.RandomizeList(randomColorsList);
+        */
+        randomColorsList = ListRandomizer.RandomizeList(randomColorsList);
         int colorindex = 0;
+        Debug.Log(randomColorsList);
         do
         {
             yield return new WaitForSeconds(Random.Range(0.3f,spawnTimer));

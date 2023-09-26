@@ -49,7 +49,6 @@ public class BoxController : MonoBehaviour
         else if (Color == BoxColor.Yellow)
         {
             boxMaterial.SetColor("_EmissionColor", yellow.ToUnityColor());
-            Debug.Log("color set");
             HDRColor = yellow;
             boxColor = BoxColor.Yellow;
         }

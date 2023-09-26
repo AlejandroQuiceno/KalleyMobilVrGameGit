@@ -5,6 +5,8 @@ using EzySlice;
 using UnityEngine.Networking;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
+using DG.Tweening;
+using UnityEditor.Build;
 
 public class ObjectSlicer : MonoBehaviour
 {
@@ -48,7 +50,13 @@ public class ObjectSlicer : MonoBehaviour
             upperHull.layer= 7;
             lowerHull.layer = 7;
             Destroy(target);
+            FadeHul(upperHull.GetComponent<MeshRenderer>().material, lowerHull.GetComponent<MeshRenderer>().material);
         }
+    }
+    void FadeHul(Material materialUpper, Material materialLower)
+    {
+        materialUpper.DOFloat(1, "_Dissolve", 2).SetDelay(0.1f).SetEase(Ease.InSine);
+        materialLower.DOFloat(1, "_Dissolve", 2).SetDelay(0.1f).SetEase(Ease.InSine);
     }
     void CreateSlicedComponent(GameObject slicedHull)
     {
@@ -57,7 +65,7 @@ public class ObjectSlicer : MonoBehaviour
         MeshCollider collider = slicedHull.AddComponent<MeshCollider>();
         collider.convex = true;
         rb.AddExplosionForce(slicedObjectInitialVelocity,slicedHull.transform.position,1);
-        Destroy(slicedHull, 4);
+        Destroy(slicedHull, 2.1f);
     }
     /// <summary>
     /// This is to send the sliced box color, and the volume of the hull to the sliced hull controller

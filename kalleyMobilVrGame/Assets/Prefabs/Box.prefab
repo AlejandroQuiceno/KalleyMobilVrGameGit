@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a9a5d1dc9c0bc443a9d2ac3854b698e, type: 2}
+  - {fileID: 2100000, guid: 7f8084a3b5555324d9ed1e4a0843eca7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,14 +128,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blue:
-    color: {r: 0.09313814, g: 0.32042477, b: 0.8584906, a: 1}
-    intensity: 10
+    color: {r: 0, g: 0.06847848, b: 0.6792453, a: 1}
+    intensity: 6
   green:
-    color: {r: 0, g: 0.9150943, b: 0.24255507, a: 1}
-    intensity: 10
+    color: {r: 0.2885705, g: 0.8509804, b: 0, a: 1}
+    intensity: 4
   red:
-    color: {r: 0.9433962, g: 0.16464934, b: 0.16464934, a: 1}
-    intensity: 8.5
+    color: {r: 0.8862745, g: 0, b: 0.024059532, a: 1}
+    intensity: 5
   yellow:
     color: {r: 0.7903107, g: 0.8301887, b: 0, a: 1}
     intensity: 4

@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 namespace ArmnomadsGames
 {
-
     [System.Serializable]
     public class TriggerEvent : UnityEvent<Collider> { }
 
@@ -421,6 +420,7 @@ namespace ArmnomadsGames
                 yield return null;
             }
         }
+        
     }
 
 }

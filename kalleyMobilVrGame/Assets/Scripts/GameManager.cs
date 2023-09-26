@@ -10,15 +10,16 @@ public class GameManager : Singleton<GameManager>
     private int canvasIndex = 0;
 
     //Tutorial fields
-    bool firstBoxHit  = false;
+    private bool firstBoxHit  = false;
+    private bool swordTriggered = false;
+    private bool nextQuestion = false;
 
-    bool nextQuestion = false;
     private List<BoxColor> correctBoxColor = new List<BoxColor>();
     public bool NextQuestion { get => nextQuestion; set => nextQuestion = value; }
     public bool FirstBoxHit { get => firstBoxHit; set => firstBoxHit = value; }
     public GameState CurrentGameState { get => currentGameState; }
     public List<BoxColor> GetCorrectBoxColor { get => correctBoxColor; }
-
+    public bool SwordTriggered { get => swordTriggered; set => swordTriggered = value; }
 
     private SpawnerScript spawner;
 
@@ -43,7 +44,8 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(1f);
         uIManager.AnimateCanvasGroupIn(canvasIndex);
         //Verificar que saque la espada
-        yield return new WaitForSeconds(5f);
+        yield return new WaitUntil(() => swordTriggered == true);
+        yield return new WaitForSeconds(1f);
         //OnStartTutorialSpawn?.Invoke();//se empieza a spawnear cubos
         spawner.StartSpawnTutorial();
         correctBoxColor.Add(BoxColor.White);
@@ -91,6 +93,7 @@ public class GameManager : Singleton<GameManager>
             yield return new WaitForSeconds(5);
             spawner.StartSpawning(questionManager.GetQuestion().answerList.Count, 20);
             yield return new WaitUntil(() => nextQuestion == true);
+            yield return new WaitForSeconds(1.5f);
             uIManager.AnimateCanvasGroupOut(canvasIndex);
             questionManager.NextQuestion();
         } while(questionManager.questions.Count >= questionManager.currentQuestionIndex);
