@@ -86,31 +86,13 @@ public class SpawnerScript : MonoBehaviour
                randomColorsList.Add(colors[coloBoxIndex]);
             }
         }
-        /*
-        for(int i = 0; i < boxesToSpawn; i++)
-        {
- 
-            if (i <= 5 && gameManager.CurrentGameState == GameState.Question)
-            {
-                int radomCorrectColorIndex = Random.Range(0, questionManager.GetQuestion().correctColors.Count);//spawnea al menos 5 de los colores correctos
-                randomColorsList.Add(questionManager.GetQuestion().correctColors[radomCorrectColorIndex]);
-            }
-            else
-            {
-                int randomIndex = Random.Range(0, colors.Length);//luego llena la lista con colores aleatorios, pueden ser correctos o incorrectos
-                randomColorsList.Add(colors[randomIndex]);
-            }
-        }
-        */
         randomColorsList = ListRandomizer.RandomizeList(randomColorsList);
         int colorindex = 0;
-        Debug.Log(randomColorsList);
         do
         {
             yield return new WaitForSeconds(Random.Range(0.3f,spawnTimer));
             SpawnCube(randomColorsList[colorindex]);
             colorindex++;
-            Debug.Log("Spawned a cube"+" boxCounter"+boxCounter);
             boxCounter++;
         } while(boxCounter != boxesToSpawn);
         if (gameManager.CurrentGameState == GameState.Tutorial) gameManager.StartQuestions();

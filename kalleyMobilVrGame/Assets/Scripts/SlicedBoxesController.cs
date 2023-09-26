@@ -12,7 +12,7 @@ public class SlicedBoxesController : MonoBehaviour
 
     private void Awake()
     {
-        objectSlicer = GetComponentInChildren<ObjectSlicer>();
+        objectSlicer = FindObjectOfType<ObjectSlicer>();
     }
     private void Start()
     {

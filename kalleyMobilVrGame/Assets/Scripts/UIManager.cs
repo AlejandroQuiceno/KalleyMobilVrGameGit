@@ -52,10 +52,12 @@ public class UIManager : Singleton<UIManager>
             if (volume <= 0.7 && volume >= 0.3)
             {
                 scoreText.text = 300f.ToString();
+                ScoreManager.GetInstance().AddScore(300);
             }
             else
             {
                 scoreText.text = 150f.ToString();
+                ScoreManager.GetInstance().AddScore(150);
             }
             TweenScore(scoreText, rectTransform);
         }

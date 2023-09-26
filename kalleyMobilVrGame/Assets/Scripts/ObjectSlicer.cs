@@ -34,7 +34,6 @@ public class ObjectSlicer : MonoBehaviour
     }
     void Slice(GameObject target, Vector3 planePosition, Vector3 slicerVelocity,BoxColor boxColor)
     {
-        Debug.Log("Object Sliced");
         AudioManager.instance.Play("SwordHit");
         Vector3 slicingDirection = endSlicingPoint.position - startSlicingPoint.position;
         Vector3 planeNormal = Vector3.Cross(slicerVelocity, slicingDirection);
@@ -55,8 +54,8 @@ public class ObjectSlicer : MonoBehaviour
     }
     void FadeHul(Material materialUpper, Material materialLower)
     {
-        materialUpper.DOFloat(1, "_Dissolve", 2).SetDelay(0.1f).SetEase(Ease.InSine);
-        materialLower.DOFloat(1, "_Dissolve", 2).SetDelay(0.1f).SetEase(Ease.InSine);
+        materialUpper.DOFloat(1, "_Dissolve", 1).SetDelay(0.1f).SetEase(Ease.InSine);
+        materialLower.DOFloat(1, "_Dissolve", 1).SetDelay(0.1f).SetEase(Ease.InSine);
     }
     void CreateSlicedComponent(GameObject slicedHull)
     {
@@ -65,7 +64,7 @@ public class ObjectSlicer : MonoBehaviour
         MeshCollider collider = slicedHull.AddComponent<MeshCollider>();
         collider.convex = true;
         rb.AddExplosionForce(slicedObjectInitialVelocity,slicedHull.transform.position,1);
-        Destroy(slicedHull, 2.1f);
+        Destroy(slicedHull, 1.1f);
     }
     /// <summary>
     /// This is to send the sliced box color, and the volume of the hull to the sliced hull controller
@@ -74,8 +73,7 @@ public class ObjectSlicer : MonoBehaviour
     /// <param name="hull">One of the sliced hulls</param>
     private void SendScore(BoxColor boxColor, GameObject hull)
     {
-        Debug.Log(MeshVolume.VolumeOfMesh(hull.GetComponent<MeshFilter>().mesh));
-        float hullVolume = MeshVolume.VolumeOfMesh(hull.GetComponent<MeshFilter>().mesh);
+        float hullVolume = MeshVolume.VolumeOfMesh(hull.GetComponent<MeshFilter>().mesh) * 100000;
         OnBoxHit?.Invoke(hullVolume, hull.transform.position, boxColor);
     }
 }

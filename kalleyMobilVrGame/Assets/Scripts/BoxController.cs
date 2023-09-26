@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using DG.Tweening;
 
 public class BoxController : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class BoxController : MonoBehaviour
         boxMaterial = GetComponent<MeshRenderer>().material;
         
     }
+    private void Start()
+    {
+        StartCoroutine(kill());
+    }
     public void SetBoxColor(BoxColor Color)
     {
         if(Color == BoxColor.Blue)
@@ -36,6 +41,7 @@ public class BoxController : MonoBehaviour
         }
         else if(Color == BoxColor.Green)
         {
+            Debug.Log("spawned green");
             boxMaterial.SetColor("_EmissionColor", green.ToUnityColor());
             HDRColor = green;
             boxColor = BoxColor.Green;
@@ -59,7 +65,13 @@ public class BoxController : MonoBehaviour
             boxColor = BoxColor.Red;
         }
     }
-    
+    private IEnumerator kill()
+    {
+        yield return new WaitForSeconds(5f);
+        boxMaterial.DOFloat(1, "_Dissolve", 1).SetDelay(0.1f).SetEase(Ease.InSine);
+        yield return new WaitForSeconds(1.3f);
+        Destroy(gameObject);
+    }
 }
 public enum BoxColor{
     Blue,Green,White,Yellow,Red
