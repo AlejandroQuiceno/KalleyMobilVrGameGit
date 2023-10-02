@@ -18,5 +18,4 @@ public class ScoreManager : Singleton<ScoreManager>
         scoreText.text = "<size=70%>X</size>" + score.ToString();
         playfabManager.SendLeaderBoard(score);
     }
-    
 }

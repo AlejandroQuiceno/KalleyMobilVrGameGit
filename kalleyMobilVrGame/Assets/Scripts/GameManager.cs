@@ -23,6 +23,9 @@ public class GameManager : Singleton<GameManager>
 
     private SpawnerScript spawner;
 
+    public delegate void state(GameState curentState);
+    public event state OnGameStateChanged;
+
     private void Awake()
     {
         spawner = FindObjectOfType<SpawnerScript>();
@@ -80,6 +83,7 @@ public class GameManager : Singleton<GameManager>
         uIManager.AnimateCanvasGroupIn(canvasIndex);
         yield return new WaitForSeconds(7f);
         currentGameState = GameState.Question;
+        OnGameStateChanged?.Invoke(currentGameState);
         uIManager.AnimateCanvasGroupOut(canvasIndex);
         canvasIndex++;
         QuestionManager questionManager = QuestionManager.GetInstance();
@@ -90,13 +94,21 @@ public class GameManager : Singleton<GameManager>
             correctBoxColor.Clear();
             correctBoxColor = questionManager.GetQuestion().correctColors;
             uIManager.AnimateCanvasGroupIn(canvasIndex);
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(8);
             spawner.StartSpawning(questionManager.GetQuestion().answerList.Count, 20);
             yield return new WaitUntil(() => nextQuestion == true);
             yield return new WaitForSeconds(1.5f);
             uIManager.AnimateCanvasGroupOut(canvasIndex);
             questionManager.NextQuestion();
-        } while(questionManager.questions.Count >= questionManager.currentQuestionIndex);
+        } while (questionManager.currentQuestionIndex <1);//questionManager.questions.Count >= questionManager.currentQuestionIndex
+        currentGameState = GameState.Scoring;
+        OnGameStateChanged?.Invoke(currentGameState);
+        canvasIndex++;
+        uIManager.AnimateCanvasGroupIn(canvasIndex);
+        yield return new WaitForSeconds(5);
+        uIManager.AnimateCanvasGroupOut(canvasIndex);
+        canvasIndex++;
+        uIManager.AnimateCanvasGroupIn(canvasIndex);
     }
 }
 

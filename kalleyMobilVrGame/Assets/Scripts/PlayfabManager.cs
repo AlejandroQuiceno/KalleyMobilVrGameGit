@@ -15,7 +15,8 @@ public class PlayfabManager : MonoBehaviour
     {
         var request = new LoginWithCustomIDRequest
         {
-            CustomId = SystemInfo.deviceUniqueIdentifier,
+            
+            CustomId = SystemInfo.deviceUniqueIdentifier,//here I have to put the name of the player 
             CreateAccount = true
         };
         PlayFabClientAPI.LoginWithCustomID(request, OnSuccess, OnError);
@@ -31,7 +32,7 @@ public class PlayfabManager : MonoBehaviour
     {
         Debug.Log("Sucesfull login/acount created");
     }
-    public void SendLeaderBoard(int score)
+    public void SendLeaderBoard(int score)//call this method from the game manager when the game finishes
     {
         var request = new UpdatePlayerStatisticsRequest
         {
@@ -69,5 +70,16 @@ public class PlayfabManager : MonoBehaviour
         {
             Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
         }
+    }
+}
+public class User{
+    private string userName;
+    private int score;
+    public int Score { get => score; }
+    public string UserName { get => userName; set => userName = value; }
+    public User (string userName, int score)
+    {
+        this.userName = userName;   
+        this.score = score;
     }
 }
