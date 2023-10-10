@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
     private bool firstBoxHit  = false;
     private bool swordTriggered = false;
     private bool nextQuestion = false;
+    private bool nameFieldEnter = false;
 
     private List<BoxColor> correctBoxColor = new List<BoxColor>();
     public bool NextQuestion { get => nextQuestion; set => nextQuestion = value; }
@@ -20,6 +21,7 @@ public class GameManager : Singleton<GameManager>
     public GameState CurrentGameState { get => currentGameState; }
     public List<BoxColor> GetCorrectBoxColor { get => correctBoxColor; }
     public bool SwordTriggered { get => swordTriggered; set => swordTriggered = value; }
+    public bool NameFieldEnter { get => nameFieldEnter; set => nameFieldEnter = value; }
 
     private SpawnerScript spawner;
 
@@ -101,11 +103,18 @@ public class GameManager : Singleton<GameManager>
             uIManager.AnimateCanvasGroupOut(canvasIndex);
             questionManager.NextQuestion();
         } while (questionManager.currentQuestionIndex <1);//questionManager.questions.Count >= questionManager.currentQuestionIndex
+        uIManager.AnimateCanvasGroupOut(canvasIndex);
+        yield return new WaitForSeconds(2f);
         currentGameState = GameState.Scoring;
         OnGameStateChanged?.Invoke(currentGameState);
         canvasIndex++;
         uIManager.AnimateCanvasGroupIn(canvasIndex);
         yield return new WaitForSeconds(5);
+        uIManager.AnimateCanvasGroupOut(canvasIndex);
+        canvasIndex++;
+        uIManager.AnimateCanvasGroupIn(canvasIndex);
+
+        yield return new WaitUntil(() => nameFieldEnter == true);
         uIManager.AnimateCanvasGroupOut(canvasIndex);
         canvasIndex++;
         uIManager.AnimateCanvasGroupIn(canvasIndex);

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.049786936, g: 0.070617594, b: 0.08751289, a: 1}
+  m_IndirectSpecularColor: {r: 0.0576528, g: 0.23458783, b: 0.440032, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Kalley Movil <color=#FF0000FF>VR</color>
+  m_text: "Kalley Mov\xEDl <color=#FF0000FF>VR</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 30710246a28a44042bd55d6607426e51, type: 2}
   m_sharedMaterial: {fileID: 1159748290126155885, guid: 30710246a28a44042bd55d6607426e51,

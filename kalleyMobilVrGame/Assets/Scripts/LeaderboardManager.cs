@@ -6,8 +6,9 @@ using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class LeaderboardManager : MonoBehaviour
 {
-    List<User> users;
+    public List<User> users;
     [SerializeField] UserScoreController[] usersUI;
+    PlayfabManager playfabManager;
     private void Awake()
     {
         usersUI = GetComponentsInChildren<UserScoreController>();

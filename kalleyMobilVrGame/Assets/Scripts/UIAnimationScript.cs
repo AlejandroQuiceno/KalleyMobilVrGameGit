@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UIElements;
 
 public class UIAnimationScript : MonoBehaviour
 {
@@ -25,16 +26,18 @@ public class UIAnimationScript : MonoBehaviour
     public void AnimateIn()
     {
         RectTransform groupRect = canvasGroup.GetComponent<RectTransform>();
+        Vector3 scale = groupRect.localScale;
+        groupRect.localScale = scale * 0.2f;
         canvasGroup.alpha = 0;
         Vector2 anchoredPosition = groupRect.anchoredPosition;
         if (animationDirectionIn == AnimationDirection.Left)
         {
-            anchoredPosition.x = groupRect.anchoredPosition.x + positionOffset;
+            anchoredPosition.x = groupRect.anchoredPosition.x - positionOffset;
             anchoredPosition.y = 0;
         }
         else if (animationDirectionIn == AnimationDirection.Right)
         {
-            anchoredPosition.x = groupRect.anchoredPosition.x - positionOffset;
+            anchoredPosition.x = groupRect.anchoredPosition.x + positionOffset;
             anchoredPosition.y = 0;
         }
         else if (animationDirectionIn == AnimationDirection.Up)
@@ -47,37 +50,40 @@ public class UIAnimationScript : MonoBehaviour
             anchoredPosition.y = groupRect.anchoredPosition.y + positionOffset;
             anchoredPosition.x = 0;
         }
-        groupRect.position = anchoredPosition;
+        groupRect.anchoredPosition = anchoredPosition;
         //AnimateChildrenIn(anchoredPosition);
         groupRect.DOLocalMove( Vector2.zero, duration).SetEase(ease);
+        groupRect.DOScale(scale,duration).SetEase(ease);
         canvasGroup.DOFade(1, duration - 0.5f).SetEase(ease);
     }
     public void AnimateOut()
     {
         RectTransform groupRect = canvasGroup.GetComponent<RectTransform>();
         Vector2 anchoredPosition = groupRect.anchoredPosition;
-        if (animationDirectionIn == AnimationDirection.Left)
+        Vector3 scale = groupRect.localScale;
+        if (animationDirectionOut == AnimationDirection.Left)
         {
             anchoredPosition.x = groupRect.anchoredPosition.x + positionOffset;
             anchoredPosition.y = 0;
         }
-        else if (animationDirectionIn == AnimationDirection.Right)
+        else if (animationDirectionOut == AnimationDirection.Right)
         {
             anchoredPosition.x = groupRect.anchoredPosition.x - positionOffset;
             anchoredPosition.y = 0;
         }
-        else if (animationDirectionIn == AnimationDirection.Up)
+        else if (animationDirectionOut == AnimationDirection.Up)
         {
-            anchoredPosition.y = groupRect.anchoredPosition.x + positionOffset;
+            anchoredPosition.y = groupRect.anchoredPosition.y + positionOffset;
             anchoredPosition.x = 0;
         }
-        else if (animationDirectionIn == AnimationDirection.Down)
+        else if (animationDirectionOut == AnimationDirection.Down)
         {
-            anchoredPosition.y = groupRect.anchoredPosition.x + positionOffset;
+            anchoredPosition.y = groupRect.anchoredPosition.y - positionOffset;
             anchoredPosition.x = 0;
         }
         //AnimateChildrenOut(anchoredPosition);
         groupRect.DOLocalMove(anchoredPosition, duration).SetEase(ease);
+        groupRect.DOScale(scale*0.2f, duration).SetEase(ease);
         canvasGroup.DOFade(0, duration - 0.5f).SetEase(ease);
     }
     /*

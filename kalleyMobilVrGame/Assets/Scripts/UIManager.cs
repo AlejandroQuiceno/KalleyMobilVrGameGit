@@ -33,6 +33,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void AnimateCanvasGroupIn(int canvasIndex)
     {
+        CanvasGroups[canvasIndex].gameObject.SetActive(true);
         CanvasGroups[canvasIndex].AnimateIn();
     }
     public void AnimateCanvasGroupOut(int canvasIndex)

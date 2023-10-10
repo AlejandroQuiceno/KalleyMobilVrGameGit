@@ -6,7 +6,11 @@ public class ScoreManager : Singleton<ScoreManager>
 {
     [SerializeField] TMP_Text scoreText;
     PlayfabManager playfabManager;
+    GameManager gameManager;
     private int score;
+
+    public int Score { get => score; }
+
     private void Awake()
     {
         ObjectSlicer objectSlicer = FindObjectOfType<ObjectSlicer>();
@@ -16,6 +20,5 @@ public class ScoreManager : Singleton<ScoreManager>
     {
         score += addedScore;
         scoreText.text = "<size=70%>X</size>" + score.ToString();
-        playfabManager.SendLeaderBoard(score);
     }
 }

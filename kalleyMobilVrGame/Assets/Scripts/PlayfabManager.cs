@@ -4,22 +4,26 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
-
+using UnityEngine.SocialPlatforms.Impl;
+using System;
 public class PlayfabManager : MonoBehaviour
 {
-    private void Start()
+    public void SignUp(string name)
     {
-        Login();
-    }
-    void Login()
-    {
-        var request = new LoginWithCustomIDRequest
+        var request = new RegisterPlayFabUserRequest
         {
-            
-            CustomId = SystemInfo.deviceUniqueIdentifier,//here I have to put the name of the player 
-            CreateAccount = true
+            Username = name, // Set the player's name as the username
+            Password = "YourPassword", // Set a password for the new account
+            RequireBothUsernameAndEmail = false // You can adjust this as needed
         };
-        PlayFabClientAPI.LoginWithCustomID(request, OnSuccess, OnError);
+
+        PlayFabClientAPI.RegisterPlayFabUser(request, OnSuccess, OnError);
+    }
+
+    private void OnSuccess(RegisterPlayFabUserResult obj)
+    {
+        Debug.Log("user logged in");
+        SendLeaderBoard(ScoreManager.GetInstance().Score);
     }
 
     private void OnError(PlayFabError error)
@@ -28,12 +32,9 @@ public class PlayfabManager : MonoBehaviour
         Debug.Log(error.GenerateErrorReport());
     }
 
-    private void OnSuccess(LoginResult obj)
-    {
-        Debug.Log("Sucesfull login/acount created");
-    }
     public void SendLeaderBoard(int score)//call this method from the game manager when the game finishes
     {
+        
         var request = new UpdatePlayerStatisticsRequest
         {
             Statistics = new List<StatisticUpdate>
@@ -46,14 +47,14 @@ public class PlayfabManager : MonoBehaviour
             }
         };
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnLeaderBoardUpdate, OnError);
-
     }
 
     private void OnLeaderBoardUpdate(UpdatePlayerStatisticsResult obj)
     {
         Debug.Log("Succesful leaderboard sent");
+        GameManager.GetInstance().NameFieldEnter = true;
     }
-    private void GetLeaderBoard()
+    public void GetLeaderBoard()
     {
         var request = new GetLeaderboardRequest
         {
@@ -66,10 +67,13 @@ public class PlayfabManager : MonoBehaviour
 
     private void OnleaderboardGet(GetLeaderboardResult result)
     {
+        List<User> users = new List<User>();
         foreach (var item in result.Leaderboard)
         {
             Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
+            users.Add(new User(item.PlayFabId, item.StatValue));
         }
+        FindObjectOfType<LeaderboardManager>().PopulateUsersUI(users);
     }
 }
 public class User{

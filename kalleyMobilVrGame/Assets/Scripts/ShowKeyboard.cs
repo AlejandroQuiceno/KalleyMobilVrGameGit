@@ -19,6 +19,7 @@ public class ShowKeyboard : MonoBehaviour
     private void SubmitText(object sender, EventArgs e)
     {
         Debug.Log(inputField.text);
+        FindObjectOfType<PlayfabManager>().SignUp(inputField.text);
     }
 
     private void Instance_Onclosed(object sender, EventArgs e)
