@@ -16,7 +16,7 @@ public class UserScoreController : MonoBehaviour
     {
         this.user = user;
         name.text = user.UserName;
-        name.text = user.Score.ToString();
+        score.text = user.Score.ToString();
         canvasGroup.alpha = 1;
     }
 }

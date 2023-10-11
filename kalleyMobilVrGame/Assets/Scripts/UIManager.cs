@@ -60,6 +60,7 @@ public class UIManager : Singleton<UIManager>
                 scoreText.text = 150f.ToString();
                 ScoreManager.GetInstance().AddScore(150);
             }
+            Debug.Log("volume: "+volume+",score: "+scoreText.text);
             TweenScore(scoreText, rectTransform);
         }
         else if (corect && GameManager.GetInstance().CurrentGameState == GameState.Tutorial)

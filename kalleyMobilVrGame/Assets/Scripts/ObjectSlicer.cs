@@ -45,7 +45,7 @@ public class ObjectSlicer : MonoBehaviour
 
             CreateSlicedComponent(upperHull);
             CreateSlicedComponent(lowerHull);
-            SendScore(boxColor, upperHull);
+            SendScore(boxColor, upperHull,lowerHull);
             upperHull.layer= 7;
             lowerHull.layer = 7;
             Destroy(target);
@@ -70,10 +70,12 @@ public class ObjectSlicer : MonoBehaviour
     /// This is to send the sliced box color, and the volume of the hull to the sliced hull controller
     /// </summary>
     /// <param name="target">the box</param>
-    /// <param name="hull">One of the sliced hulls</param>
-    private void SendScore(BoxColor boxColor, GameObject hull)
+    /// <param name="upperHull">One of the sliced hulls</param>
+    private void SendScore(BoxColor boxColor, GameObject upperHull, GameObject lowerhull)
     {
-        float hullVolume = MeshVolume.VolumeOfMesh(hull.GetComponent<MeshFilter>().mesh) * 100000;
-        OnBoxHit?.Invoke(hullVolume, hull.transform.position, boxColor);
+        float upperHullVolume = MeshVolume.VolumeOfMeshTetrahedron(upperHull.GetComponent<MeshFilter>().mesh);
+        float lowerHullVolume = MeshVolume.VolumeOfMeshTetrahedron(lowerhull.GetComponent<MeshFilter>().mesh);
+        Debug.Log(upperHullVolume + upperHullVolume);
+        OnBoxHit?.Invoke(upperHullVolume, upperHull.transform.position, boxColor);
     }
 }

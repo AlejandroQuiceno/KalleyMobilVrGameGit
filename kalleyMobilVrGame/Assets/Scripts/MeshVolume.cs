@@ -32,5 +32,24 @@ public static class MeshVolume
         }
         return Mathf.Abs(volume);
     }
+    public static float VolumeOfMeshTetrahedron(Mesh mesh)
+    {
+        float volume = 0;
+
+        Vector3[] vertices = mesh.vertices;
+        int[] triangles = mesh.triangles;
+
+        for (int i = 0; i < triangles.Length; i += 3)
+        {
+            Vector3 p1 = vertices[triangles[i + 0]];
+            Vector3 p2 = vertices[triangles[i + 1]];
+            Vector3 p3 = vertices[triangles[i + 2]];
+
+            Vector3 centroid = (p1 + p2 + p3) / 3.0f;
+            volume += SignedVolumeOfTriangle(p1, p2, p3) * Vector3.Dot(centroid, Vector3.Cross(p1, p2 - p1));
+        }
+
+        return Mathf.Abs(volume / 6.0f);
+    }
 
 }

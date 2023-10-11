@@ -12,7 +12,8 @@ public class PlayfabManager : MonoBehaviour
     {
         var request = new RegisterPlayFabUserRequest
         {
-            Username = name, // Set the player's name as the username
+            DisplayName = name, // Set the player's name as the username
+            Username = name,
             Password = "YourPassword", // Set a password for the new account
             RequireBothUsernameAndEmail = false // You can adjust this as needed
         };
@@ -52,6 +53,7 @@ public class PlayfabManager : MonoBehaviour
     private void OnLeaderBoardUpdate(UpdatePlayerStatisticsResult obj)
     {
         Debug.Log("Succesful leaderboard sent");
+        GetLeaderBoard();
         GameManager.GetInstance().NameFieldEnter = true;
     }
     public void GetLeaderBoard()
@@ -68,12 +70,32 @@ public class PlayfabManager : MonoBehaviour
     private void OnleaderboardGet(GetLeaderboardResult result)
     {
         List<User> users = new List<User>();
+
+        // Iterate through the leaderboard items
         foreach (var item in result.Leaderboard)
         {
-            Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
-            users.Add(new User(item.PlayFabId, item.StatValue));
+            // Fetch the player's profile using the PlayFabId
+            PlayFabClientAPI.GetPlayerProfile(new GetPlayerProfileRequest
+            {
+                PlayFabId = item.PlayFabId,
+                ProfileConstraints = new PlayerProfileViewConstraints
+                {
+                    ShowDisplayName = true // This ensures that the username (display name) is retrieved
+                }
+            }, (profileResult) =>
+            {
+                if (profileResult.PlayerProfile != null)
+                {
+                    string username = profileResult.PlayerProfile.DisplayName;
+                    users.Add(new User(username, item.StatValue));
+                    FindObjectOfType<LeaderboardManager>().PopulateUsersUI(users);
+                }
+                else
+                {
+                    Debug.LogError("Failed to get player profile");
+                }
+            }, null);
         }
-        FindObjectOfType<LeaderboardManager>().PopulateUsersUI(users);
     }
 }
 public class User{

@@ -34,7 +34,10 @@ public class SceneTransitionManager : MonoBehaviour
     {
         StartCoroutine(GoToSceneAsyncRoutine(sceneIndex));
     }
-
+    public void ReloadScene()
+    {
+        StartCoroutine(GoToSceneAsyncRoutine(1));
+    }
     IEnumerator GoToSceneAsyncRoutine(int sceneIndex)
     {
         fadeScreen.FadeOut();

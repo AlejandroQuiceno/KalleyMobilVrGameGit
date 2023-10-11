@@ -115,7 +115,7 @@ public class SpawnerScript : MonoBehaviour
         Vector3 randomOffset = new Vector3(randomX, randomY, randomZ);
         direction.Normalize();
         randomOffset /= 10;
-        rb.velocity = (direction + randomOffset) * velocityIntensity;
+        rb.velocity = (direction + randomOffset) * Random.Range(velocityIntensity*0.9f, velocityIntensity * 1.1f);
     }
     IEnumerator SpawnTutorial()
     {
