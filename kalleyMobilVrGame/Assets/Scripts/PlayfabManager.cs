@@ -54,7 +54,6 @@ public class PlayfabManager : MonoBehaviour
     {
         Debug.Log("Succesful leaderboard sent");
         GetLeaderBoard();
-        GameManager.GetInstance().NameFieldEnter = true;
     }
     public void GetLeaderBoard()
     {
@@ -96,6 +95,7 @@ public class PlayfabManager : MonoBehaviour
                 }
             }, null);
         }
+        GameManager.GetInstance().NameFieldEnter = true;
     }
 }
 public class User{

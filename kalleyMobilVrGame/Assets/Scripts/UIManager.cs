@@ -39,6 +39,7 @@ public class UIManager : Singleton<UIManager>
     public void AnimateCanvasGroupOut(int canvasIndex)
     {
         CanvasGroups[canvasIndex].AnimateOut();
+        CanvasGroups[canvasIndex].gameObject.SetActive(false);
     }
     public void InstantiateScore(float volume, Vector3 worldPosition,BoxColor boxColor)
     {

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
+using System.Linq;
 
 public class LeaderboardManager : MonoBehaviour
 {
     public List<User> users;
+    
     [SerializeField] UserScoreController[] usersUI;
     PlayfabManager playfabManager;
     private void Awake()
@@ -16,9 +18,10 @@ public class LeaderboardManager : MonoBehaviour
     public void PopulateUsersUI(List<User> users)
     {
         this.users = users;
-        for (int i=0;i<users.Count;i++) 
+        var sortedUsers = users.OrderByDescending(user => user.Score).ToList();
+        for (int i=0;i< sortedUsers.Count;i++) 
         {
-            usersUI[i].PopulateUIUser(users[i]);
+            usersUI[i].PopulateUIUser(sortedUsers[i]);
         } 
     }
 }
