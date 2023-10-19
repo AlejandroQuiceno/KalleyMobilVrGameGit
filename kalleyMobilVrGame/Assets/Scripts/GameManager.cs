@@ -102,7 +102,7 @@ public class GameManager : Singleton<GameManager>
             yield return new WaitForSeconds(1.5f);
             uIManager.AnimateCanvasGroupOut(canvasIndex);
             questionManager.NextQuestion();
-        } while (questionManager.currentQuestionIndex <1);//questionManager.questions.Count >= questionManager.currentQuestionIndex
+        } while (questionManager.currentQuestionIndex <5);//questionManager.questions.Count >= questionManager.currentQuestionIndex
         uIManager.AnimateCanvasGroupOut(canvasIndex);
         yield return new WaitForSeconds(2f);
         currentGameState = GameState.Scoring;

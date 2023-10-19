@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Gradient Skybox
+  m_Name: MenuSky
   m_Shader: {fileID: 4800000, guid: f870c618efe6c2d499bb28b864be41a9, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -28,9 +28,9 @@ Material:
     - _BottomExponent: 5.84
     - _DirectionPitch: 0
     - _DirectionYaw: 0
-    - _Exponent: 1.8
+    - _Exponent: 1.08
     - _Exposure: 1.19
-    - _Intensity: 0.5
+    - _Intensity: 1.34
     - _SunDisk: 0
     - _SunSize: 0
     - _SunSizeConvergence: 5
@@ -38,7 +38,7 @@ Material:
     m_Colors:
     - _BottomColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 0}
     - _Color1: {r: 0.0754717, g: 0.0754717, b: 0.0754717, a: 0}
-    - _Color2: {r: 0.54126024, g: 0.64027, b: 0.7924528, a: 1}
+    - _Color2: {r: 0, g: 0.60784316, b: 1, a: 0}
     - _Direction: {r: 0, g: 1, b: 0, a: 0}
     - _GroundColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
     - _HorizonColor: {r: 1, g: 1, b: 1, a: 0}

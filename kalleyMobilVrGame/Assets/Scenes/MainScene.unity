@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.16363473, g: 0.19475268, b: 0.2735849, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: ba45465a1b3de9940b0d6ccd866fbeed, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -243,7 +243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8370108
 RectTransform:
   m_ObjectHideFlags: 0
@@ -459,7 +459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &37134705
 RectTransform:
   m_ObjectHideFlags: 0
@@ -655,42 +655,72 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    playOnAwake: 0
   - name: uihoverenter
     clip: {fileID: 8300000, guid: c6dd68b4c268b8b48bb866311bf7ede6, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    playOnAwake: 0
   - name: uihoverexit
     clip: {fileID: 8300000, guid: c00193f69f150124cbf3f5671b986b63, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    playOnAwake: 0
   - name: SwordHit
     clip: {fileID: 8300000, guid: c4581c356efcc66438f72d6a9381bae5, type: 3}
-    volume: 0.404
-    pitch: 0.7
+    volume: 0.186
+    pitch: 0.6
     loop: 0
     source: {fileID: 0}
+    playOnAwake: 0
   - name: SlowMotionIn
     clip: {fileID: 8300000, guid: a97b6b348711d8a4e916fbc8c90364ff, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    playOnAwake: 0
   - name: SlowMotionOut
     clip: {fileID: 8300000, guid: d57295f9a46d36443b655c79aae05a1e, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    playOnAwake: 0
   - name: Woosh
     clip: {fileID: 8300000, guid: d57295f9a46d36443b655c79aae05a1e, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    playOnAwake: 0
+  - name: GameMusic
+    clip: {fileID: 8300000, guid: 78d8e14c8c13e92408164f98860d8ef6, type: 3}
+    volume: 0.108
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    playOnAwake: 1
+  - name: UIwhoosh
+    clip: {fileID: 8300000, guid: d04a430da82bd594283c50110bdab323, type: 3}
+    volume: 0.529
+    pitch: 1.3
+    loop: 0
+    source: {fileID: 0}
+    playOnAwake: 0
+  - name: BoxHitWrong
+    clip: {fileID: 8300000, guid: 3f8aecc2ba40c884499f379fa4d59be3, type: 3}
+    volume: 0.796
+    pitch: 0.3
+    loop: 0
+    source: {fileID: 0}
+    playOnAwake: 0
+  scrollBar: {fileID: 0}
+  masterVolume: 0
 --- !u!4 &67432488
 Transform:
   m_ObjectHideFlags: 0
@@ -1644,7 +1674,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c4581c356efcc66438f72d6a9381bae5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.158
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2021,7 +2051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &297106634
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2903,7 +2933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &492917996
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3450,7 +3480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &565774864
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3582,7 +3612,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c4581c356efcc66438f72d6a9381bae5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.126
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4936,7 +4966,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757990160}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5fc6632ed707ab4698ecc7d2baf862f, type: 3}
   m_Name: 
@@ -4950,7 +4980,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757990160}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 919e39492806b334982b6b84c90dd927, type: 3}
   m_Name: 
@@ -5999,7 +6029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerTranform: {fileID: 1861145350}
-  velocityIntensity: 3.5
+  velocityIntensity: 2.9
   boxPrefab: {fileID: 6968126682955929245, guid: 44335b64cfc64b044842e197c7bc77d0,
     type: 3}
   SpawnPoints:
@@ -6287,7 +6317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &984288449
 Transform:
   m_ObjectHideFlags: 0
@@ -6673,7 +6703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1014182527
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10072,7 +10102,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1249676367
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10361,7 +10391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1305157049
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11337,7 +11367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1475826722
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12238,7 +12268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1586266572
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12258,7 +12288,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -161, y: -31}
+  m_AnchoredPosition: {x: -168.74, y: -31}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1586266573
@@ -13449,7 +13479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1671728263
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14165,12 +14195,12 @@ PrefabInstance:
     - target: {fileID: 4796859041258840554, guid: 877d7a8a0be55254fb41c63fe08ad4aa,
         type: 3}
       propertyPath: m_Volume
-      value: 0.828
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: 8397760113552823229, guid: 877d7a8a0be55254fb41c63fe08ad4aa,
         type: 3}
       propertyPath: m_Volume
-      value: 0.801
+      value: 0.442
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 877d7a8a0be55254fb41c63fe08ad4aa, type: 3}
@@ -14315,6 +14345,18 @@ MonoBehaviour:
       m_Action: Sword
       m_Flags: 0
     m_Flags: 0
+--- !u!114 &1758302141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758302132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3a880c885202549be4cf409f74c3a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1768779044
 GameObject:
   m_ObjectHideFlags: 0
@@ -14408,7 +14450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1780942428
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14427,7 +14469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -146.34099, y: -64.964}
+  m_AnchoredPosition: {x: -154.081, y: -64.964}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1780942429
@@ -15420,7 +15462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1962315807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15665,12 +15707,12 @@ PrefabInstance:
     - target: {fileID: 4796859041258840554, guid: 877d7a8a0be55254fb41c63fe08ad4aa,
         type: 3}
       propertyPath: m_Volume
-      value: 0.828
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: 8397760113552823229, guid: 877d7a8a0be55254fb41c63fe08ad4aa,
         type: 3}
       propertyPath: m_Volume
-      value: 0.801
+      value: 0.384
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 877d7a8a0be55254fb41c63fe08ad4aa, type: 3}
@@ -16082,7 +16124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2038219712
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16112,7 +16154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -141.26, y: 204.28}
+  m_AnchoredPosition: {x: -149, y: 200}
   m_SizeDelta: {x: 287.3, y: 343.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2038219713

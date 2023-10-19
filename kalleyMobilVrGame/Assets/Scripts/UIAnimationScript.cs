@@ -52,9 +52,10 @@ public class UIAnimationScript : MonoBehaviour
         }
         groupRect.anchoredPosition = anchoredPosition;
         //AnimateChildrenIn(anchoredPosition);
-        groupRect.DOLocalMove( Vector2.zero, duration).SetEase(ease);
-        groupRect.DOScale(scale,duration).SetEase(ease);
+        groupRect.DOLocalMove( Vector2.zero, duration+0.3f).SetEase(ease);
+        groupRect.DOScale(scale, duration).SetEase(ease);
         canvasGroup.DOFade(1, duration - 0.5f).SetEase(ease);
+        AudioManager.instance.Play("UIwhoosh");
     }
     public void AnimateOut()
     {
@@ -82,9 +83,10 @@ public class UIAnimationScript : MonoBehaviour
             anchoredPosition.x = 0;
         }
         //AnimateChildrenOut(anchoredPosition);
-        groupRect.DOLocalMove(anchoredPosition, duration).SetEase(ease);
-        groupRect.DOScale(scale*0.2f, duration).SetEase(ease);
+        groupRect.DOLocalMove(anchoredPosition, duration + 0.3f).SetEase(ease);
+        groupRect.DOScale(scale*0.2f, duration ).SetEase(ease);
         canvasGroup.DOFade(0, duration - 0.5f).SetEase(ease);
+        AudioManager.instance.Play("UIwhoosh");
     }
     /*
     private  void AnimateChildrenIn(Vector2 anchoredPosition)

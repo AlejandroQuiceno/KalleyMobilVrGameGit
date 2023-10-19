@@ -77,6 +77,7 @@ public class UIManager : Singleton<UIManager>
             RectTransform rectTransform = instance.GetComponent<RectTransform>();
             instance.TryGetComponent<Image>(out Image image);
             TweenScore(image, rectTransform);
+            //AudioManager.instance.Play("BoxHitWrong");
         }
     }
     private void TweenScore(TMP_Text scoreText, RectTransform rectTransform)

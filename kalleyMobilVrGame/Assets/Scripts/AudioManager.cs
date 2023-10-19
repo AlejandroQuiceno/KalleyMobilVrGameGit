@@ -1,19 +1,20 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Sound
 {
     public string name;
     public AudioClip clip;
-    [Range(0,1)]
+    [Range(0, 1)]
     public float volume = 1;
-    [Range(-3,3)]
+    [Range(-3, 3)]
     public float pitch = 1;
     public bool loop = false;
     public AudioSource source;
-
+    public bool playOnAwake;
     public Sound()
     {
         volume = 1;
@@ -25,8 +26,9 @@ public class Sound
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
-
+    [SerializeField] Scrollbar scrollBar;
     public static AudioManager instance;
+    public float masterVolume;
     //AudioManager
 
     void Awake()
@@ -38,9 +40,7 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         DontDestroyOnLoad(gameObject);
-
         foreach (Sound s in sounds)
         {
             if(!s.source)
@@ -51,6 +51,7 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            if(s.playOnAwake) s.source.Play();
         }
     }
 
@@ -65,7 +66,17 @@ public class AudioManager : MonoBehaviour
 
         s.source.Play();
     }
-
+    public void OnMasterVolumeChanged()
+    {
+        if(scrollBar != null)
+        {
+            masterVolume = scrollBar.value;
+            foreach (var item in sounds)
+            {
+                item.volume *= masterVolume;
+            }
+        }
+    }
     public void Stop(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
