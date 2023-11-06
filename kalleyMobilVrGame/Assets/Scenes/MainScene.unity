@@ -5158,7 +5158,7 @@ PrefabInstance:
     - target: {fileID: 5686134208185362930, guid: 1fd3a7c43c8190f4d8c167ebde694364,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fd3a7c43c8190f4d8c167ebde694364, type: 3}
@@ -6317,7 +6317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &984288449
 Transform:
   m_ObjectHideFlags: 0
@@ -9452,7 +9452,7 @@ MonoBehaviour:
     - Super Giros
     - Nequi
     - Pagatodo
-    correctColors: 04000000030000000100000000000000
+    correctColors: 040000000300000001000000
   - question: "\xBFCu\xE1les son los <b>paquetes<b> para empleados? "
     answerList:
     - '4 GB minutos y SMS ilimitados  '
@@ -9481,7 +9481,7 @@ MonoBehaviour:
     - kalleymovil.com.co
     - 'Marca al 018000415268 '
     - 'Marcando desde un KM *800 '
-    correctColors: 0300000001000000
+    correctColors: 03000000010000000400000000000000
   currentQuestionIndex: 0
 --- !u!1 &1168938985
 GameObject:
@@ -14003,6 +14003,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right Terminator
       objectReference: {fileID: 0}
+    - target: {fileID: 7651460648909393966, guid: 06cd9e9af97d88946893bd961c4d7f4f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06cd9e9af97d88946893bd961c4d7f4f, type: 3}
 --- !u!4 &1737519817 stripped
@@ -15462,7 +15467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1962315807
 MonoBehaviour:
   m_ObjectHideFlags: 0
