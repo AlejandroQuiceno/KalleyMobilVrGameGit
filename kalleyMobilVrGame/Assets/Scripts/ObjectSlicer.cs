@@ -20,6 +20,7 @@ public class ObjectSlicer : MonoBehaviour
     public delegate void BoxHitDelegate(float hullVolume,Vector3 hullPosition,BoxColor boxColor);
     public event BoxHitDelegate OnBoxHit;
 
+    [SerializeField] GameObject sparks;
 
     private int hullCount;
     void Update()
@@ -40,6 +41,7 @@ public class ObjectSlicer : MonoBehaviour
         SlicedHull hull = target.Slice(planePosition, planeNormal);
         if (hull != null)
         {
+            
             GameObject upperHull = hull.CreateUpperHull(target,slicedMaterial);
             GameObject lowerHull = hull.CreateLowerHull(target, slicedMaterial);
 
@@ -48,14 +50,23 @@ public class ObjectSlicer : MonoBehaviour
             SendScore(boxColor, upperHull,lowerHull);
             upperHull.layer= 7;
             lowerHull.layer = 7;
+            InstantiateParticles(lowerHull.transform.position);
             Destroy(target);
-            FadeHul(upperHull.GetComponent<MeshRenderer>().material, lowerHull.GetComponent<MeshRenderer>().material);
+            FadeHul(upperHull.GetComponent<MeshRenderer>().materials, lowerHull.GetComponent<MeshRenderer>().materials);
         }
     }
-    void FadeHul(Material materialUpper, Material materialLower)
+    void FadeHul(Material[] materialsUpper, Material[] materialsLower)
     {
-        materialUpper.DOFloat(1, "_Dissolve", 1).SetDelay(0.1f).SetEase(Ease.InSine);
-        materialLower.DOFloat(1, "_Dissolve", 1).SetDelay(0.1f).SetEase(Ease.InSine);
+        for (int i =0;i< materialsUpper.Length && i<materialsLower.Length;i++)
+        {
+            materialsUpper[i].DOFloat(1, "_Dissolve", 1).SetDelay(0.1f).SetEase(Ease.InSine);
+            materialsLower[i].DOFloat(1, "_Dissolve", 1).SetDelay(0.1f).SetEase(Ease.InSine);
+        }
+    }
+    private void InstantiateParticles(Vector3 position)
+    {
+        GameObject instance = Instantiate(sparks, position, Quaternion.identity);
+        instance.GetComponent<ParticleSystem>().Play();
     }
     void CreateSlicedComponent(GameObject slicedHull)
     {
