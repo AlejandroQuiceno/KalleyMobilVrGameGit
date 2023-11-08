@@ -25,12 +25,15 @@ public class GameManager : Singleton<GameManager>
 
     private SpawnerScript spawner;
 
+    private ProgressBar progressBar;
+
     public delegate void state(GameState curentState);
     public event state OnGameStateChanged;
 
     private void Awake()
     {
         spawner = FindObjectOfType<SpawnerScript>();
+        progressBar = FindObjectOfType<ProgressBar>();
     }
     void Start()
     {
@@ -87,6 +90,7 @@ public class GameManager : Singleton<GameManager>
         currentGameState = GameState.Question;
         OnGameStateChanged?.Invoke(currentGameState);
         uIManager.AnimateCanvasGroupOut(canvasIndex);
+        progressBar.Enable(true);
         canvasIndex++;
         QuestionManager questionManager = QuestionManager.GetInstance();
         do
@@ -101,9 +105,11 @@ public class GameManager : Singleton<GameManager>
             yield return new WaitUntil(() => nextQuestion == true);
             yield return new WaitForSeconds(1.5f);
             uIManager.AnimateCanvasGroupOut(canvasIndex);
+            progressBar.IncreaseFill();
             questionManager.NextQuestion();
-        } while (questionManager.currentQuestionIndex <5);//questionManager.questions.Count >= questionManager.currentQuestionIndex
+        } while (questionManager.currentQuestionIndex <1);//questionManager.questions.Count >= questionManager.currentQuestionIndex
         uIManager.AnimateCanvasGroupOut(canvasIndex);
+        progressBar.Enable(false);
         yield return new WaitForSeconds(2f);
         currentGameState = GameState.Scoring;
         OnGameStateChanged?.Invoke(currentGameState);
