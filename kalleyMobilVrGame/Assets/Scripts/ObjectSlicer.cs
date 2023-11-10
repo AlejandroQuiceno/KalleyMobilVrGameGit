@@ -86,7 +86,6 @@ public class ObjectSlicer : MonoBehaviour
     {
         float upperHullVolume = MeshVolume.VolumeOfMeshTetrahedron(upperHull.GetComponent<MeshFilter>().mesh);
         float lowerHullVolume = MeshVolume.VolumeOfMeshTetrahedron(lowerhull.GetComponent<MeshFilter>().mesh);
-        Debug.Log(upperHullVolume + upperHullVolume);
         OnBoxHit?.Invoke(upperHullVolume, upperHull.transform.position, boxColor);
     }
 }

@@ -6,12 +6,8 @@ public class UserScoreController : MonoBehaviour
 {
     [SerializeField] TMP_Text name;
     [SerializeField] TMP_Text score;
-    CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup;
     private User user;
-    private void Awake()
-    {
-        canvasGroup = GetComponent<CanvasGroup>();
-    }
     public void PopulateUIUser(User user)
     {
         this.user = user;

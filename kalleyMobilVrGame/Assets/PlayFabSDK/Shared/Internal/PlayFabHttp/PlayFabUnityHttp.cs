@@ -204,7 +204,7 @@ namespace PlayFab.Internal
 
                     try
                     {
-                        reqContainer.InvokeSuccessCallback();
+                        reqContainer.InvokeSuccessCallback();   
                     }
                     catch (Exception e)
                     {

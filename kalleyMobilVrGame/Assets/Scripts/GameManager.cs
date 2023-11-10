@@ -27,6 +27,8 @@ public class GameManager : Singleton<GameManager>
 
     private ProgressBar progressBar;
 
+    private FeedbackAnimation feedbackAnimation;
+
     public delegate void state(GameState curentState);
     public event state OnGameStateChanged;
 
@@ -34,6 +36,7 @@ public class GameManager : Singleton<GameManager>
     {
         spawner = FindObjectOfType<SpawnerScript>();
         progressBar = FindObjectOfType<ProgressBar>();
+        feedbackAnimation = FindObjectOfType<FeedbackAnimation>();
     }
     void Start()
     {
@@ -103,7 +106,9 @@ public class GameManager : Singleton<GameManager>
             yield return new WaitForSeconds(8);
             spawner.StartSpawning(questionManager.GetQuestion().answerList.Count, 20);
             yield return new WaitUntil(() => nextQuestion == true);
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(2f);
+            feedbackAnimation.ShowCorrectAnswers();
+            yield return new WaitForSeconds(6f);
             uIManager.AnimateCanvasGroupOut(canvasIndex);
             progressBar.IncreaseFill();
             questionManager.NextQuestion();

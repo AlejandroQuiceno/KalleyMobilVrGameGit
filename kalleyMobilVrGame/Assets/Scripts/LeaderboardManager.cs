@@ -8,20 +8,41 @@ using System.Linq;
 public class LeaderboardManager : MonoBehaviour
 {
     public List<User> users;
-    
+    bool called;
     [SerializeField] UserScoreController[] usersUI;
     PlayfabManager playfabManager;
+    public User currentUser;
     private void Awake()
     {
-        usersUI = GetComponentsInChildren<UserScoreController>();
+        users = new List<User>();
     }
-    public void PopulateUsersUI(List<User> users)
+    public void PopulateUsersUI(User user)
     {
-        this.users = users;
-        var sortedUsers = users.OrderByDescending(user => user.Score).ToList();
-        for (int i=0;i< sortedUsers.Count;i++) 
+        users.Add(user);
+        if (users.Count == 10)
         {
-            usersUI[i].PopulateUIUser(sortedUsers[i]);
-        } 
+            DisplayUsers();
+        }
+        else
+        {
+            Invoke("DisplayUsers",1);
+        }
+    }
+    private void DisplayUsers()
+    {
+        if (currentUser != null)
+        {
+            users.Add(currentUser);
+            currentUser = null;
+        }
+        if (!called)
+        {
+            users = users.OrderByDescending(u => u.Score).ToList();
+            called = true;
+            for (int i = 0; i < Mathf.Min(users.Count, usersUI.Length); i++)
+            {
+                usersUI[i].PopulateUIUser(users[i]);
+            }
+        }
     }
 }

@@ -8,6 +8,12 @@ using UnityEngine.SocialPlatforms.Impl;
 using System;
 public class PlayfabManager : MonoBehaviour
 {
+    LeaderboardManager leaderboardManager;
+    User currentUser;
+    private void Awake()
+    {
+        leaderboardManager = FindObjectOfType<LeaderboardManager>();
+    }
     public void SignUp(string name)
     {
         var request = new RegisterPlayFabUserRequest
@@ -16,8 +22,9 @@ public class PlayfabManager : MonoBehaviour
             Username = name,
             Password = "YourPassword", // Set a password for the new account
             RequireBothUsernameAndEmail = false // You can adjust this as needed
-        };
 
+        };
+        leaderboardManager.currentUser = new User(name, ScoreManager.GetInstance().Score);
         PlayFabClientAPI.RegisterPlayFabUser(request, OnSuccess, OnError);
     }
 
@@ -25,6 +32,7 @@ public class PlayfabManager : MonoBehaviour
     {
         Debug.Log("user logged in");
         SendLeaderBoard(ScoreManager.GetInstance().Score);
+        
     }
 
     private void OnError(PlayFabError error)
@@ -86,8 +94,9 @@ public class PlayfabManager : MonoBehaviour
                 if (profileResult.PlayerProfile != null)
                 {
                     string username = profileResult.PlayerProfile.DisplayName;
-                    users.Add(new User(username, item.StatValue));
-                    FindObjectOfType<LeaderboardManager>().PopulateUsersUI(users);
+                    User newuser = new User(username, item.StatValue);
+                    users.Add(newuser);
+                    FindObjectOfType<LeaderboardManager>().PopulateUsersUI(newuser);
                 }
                 else
                 {

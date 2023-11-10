@@ -26,7 +26,7 @@ public class Sound
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
-    [SerializeField] Scrollbar scrollBar;
+    [SerializeField] Slider scrollBar;
     public static AudioManager instance;
     public float masterVolume;
     //AudioManager
@@ -40,7 +40,6 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject);
         foreach (Sound s in sounds)
         {
             if(!s.source)
@@ -63,7 +62,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound: " + name + " not found");
             return;
         }
-
+        s.source.volume = s.volume;
         s.source.Play();
     }
     public void OnMasterVolumeChanged()
@@ -73,7 +72,7 @@ public class AudioManager : MonoBehaviour
             masterVolume = scrollBar.value;
             foreach (var item in sounds)
             {
-                item.volume *= masterVolume;
+                item.volume = masterVolume;
             }
         }
     }
