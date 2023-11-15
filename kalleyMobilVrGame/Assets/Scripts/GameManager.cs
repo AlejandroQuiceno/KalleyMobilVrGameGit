@@ -126,7 +126,6 @@ public class GameManager : Singleton<GameManager>
         } while (questionManager.currentQuestionIndex < quiestionAmount);//questionManager.questions.Count >= questionManager.currentQuestionIndex
         uIManager.AnimateCanvasGroupOut(canvasIndex);
         progressBar.Enable(false);
-        yield return new WaitForSeconds(2f);
         currentGameState = GameState.Scoring;
         OnGameStateChanged?.Invoke(currentGameState);
         canvasIndex++;

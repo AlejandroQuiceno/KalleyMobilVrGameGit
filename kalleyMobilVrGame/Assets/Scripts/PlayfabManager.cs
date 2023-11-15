@@ -76,35 +76,44 @@ public class PlayfabManager : MonoBehaviour
 
     private void OnleaderboardGet(GetLeaderboardResult result)
     {
-        List<User> users = new List<User>();
-
-        // Iterate through the leaderboard items
-        foreach (var item in result.Leaderboard)
+        if (result.Leaderboard == null || result.Leaderboard.Count == 0)
         {
-            // Fetch the player's profile using the PlayFabId
-            PlayFabClientAPI.GetPlayerProfile(new GetPlayerProfileRequest
-            {
-                PlayFabId = item.PlayFabId,
-                ProfileConstraints = new PlayerProfileViewConstraints
-                {
-                    ShowDisplayName = true // This ensures that the username (display name) is retrieved
-                }
-            }, (profileResult) =>
-            {
-                if (profileResult.PlayerProfile != null)
-                {
-                    string username = profileResult.PlayerProfile.DisplayName;
-                    User newuser = new User(username, item.StatValue);
-                    users.Add(newuser);
-                    FindObjectOfType<LeaderboardManager>().PopulateUsersUI(newuser);
-                }
-                else
-                {
-                    Debug.LogError("Failed to get player profile");
-                }
-            }, null);
+            Debug.Log("No users found in the leaderboard.");
+            GameManager.GetInstance().NameFieldEnter = true;
+            FindObjectOfType<LeaderboardManager>().DiplayCurrentUser();
         }
-        GameManager.GetInstance().NameFieldEnter = true;
+        else
+        {
+            List<User> users = new List<User>();
+
+            // Iterate through the leaderboard items
+            foreach (var item in result.Leaderboard)
+            {
+                // Fetch the player's profile using the PlayFabId
+                PlayFabClientAPI.GetPlayerProfile(new GetPlayerProfileRequest
+                {
+                    PlayFabId = item.PlayFabId,
+                    ProfileConstraints = new PlayerProfileViewConstraints
+                    {
+                        ShowDisplayName = true // This ensures that the username (display name) is retrieved
+                    }
+                }, (profileResult) =>
+                {
+                    if (profileResult.PlayerProfile != null)
+                    {
+                        string username = profileResult.PlayerProfile.DisplayName;
+                        User newuser = new User(username, item.StatValue);
+                        users.Add(newuser);
+                        FindObjectOfType<LeaderboardManager>().PopulateUsersUI(newuser);
+                    }
+                    else
+                    {
+                        Debug.LogError("Failed to get player profile");
+                    }
+                }, null);
+            }
+            GameManager.GetInstance().NameFieldEnter = true;
+        }
     }
 }
 public class User{

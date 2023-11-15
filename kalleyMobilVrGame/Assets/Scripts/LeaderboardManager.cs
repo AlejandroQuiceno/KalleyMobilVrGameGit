@@ -28,6 +28,14 @@ public class LeaderboardManager : MonoBehaviour
             Invoke("DisplayUsers",1);
         }
     }
+    public void DiplayCurrentUser()
+    {
+        if (currentUser != null)
+        {
+            users.Add(currentUser);
+            usersUI[0].PopulateUIUser(users[0]);
+        }
+    }
     private void DisplayUsers()
     {
         if (currentUser != null)
