@@ -15,12 +15,12 @@ public class FeedbackAnimation : MonoBehaviour
         {
             Debug.Log("correct index"+correctAnserindexes[i]);
             Sequence sequence = DOTween.Sequence(); 
-            sequence.Append(backgroundImages[correctAnserindexes[i]].DOFade(0, 0.1f));
-            sequence.Append(backgroundImages[correctAnserindexes[i]].DOFade(0.3f, 0.1f));
-            sequence.Append(backgroundImages[correctAnserindexes[i]].DOFade(0, 0.1f).SetDelay(0.15f));
-            sequence.Append(backgroundImages[correctAnserindexes[i]].DOFade(0.3f, 0.1f));
-            sequence.Append(backgroundImages[correctAnserindexes[i]].DOFade(0, 0.1f).SetDelay(0.15f));
-            sequence.Append(backgroundImages[correctAnserindexes[i]].DOFade(0.3f, 0.1f));
+            sequence.Append(backgroundImages[correctAnserindexes[i]].DOFade(0, 0.05f));
+            sequence.Append(backgroundImages[correctAnserindexes[i]].DOFade(0.3f, 0.05f));
+            sequence.Append(backgroundImages[correctAnserindexes[i]].DOFade(0, 0.1f).SetDelay(0.1f));
+            sequence.Append(backgroundImages[correctAnserindexes[i]].DOFade(0.3f, 0.05f));
+            sequence.Append(backgroundImages[correctAnserindexes[i]].DOFade(0, 0.1f).SetDelay(0.1f));
+            sequence.Append(backgroundImages[correctAnserindexes[i]].DOFade(0.3f, 0.05f));
             sequence.Append(backgroundImages[correctAnserindexes[i]].DOFade(0, 0.1f).SetDelay(6f));
         }
         AudioManager.instance.Play("CorrectAnswer");

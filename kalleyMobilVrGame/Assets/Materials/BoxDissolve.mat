@@ -74,7 +74,9 @@ Material:
     - _MeshHeight: 0.01
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Sliding_Velocity: 1
     m_Colors:
     - _EdgeColor: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
     - _EmissionColor: {r: 2.79544, g: 2.79544, b: 2.79544, a: 0}
+    - _EmissionColor_1: {r: 8, g: 8, b: 8, a: 0}
   m_BuildTextureStacks: []

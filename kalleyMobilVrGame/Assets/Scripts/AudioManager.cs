@@ -2,7 +2,7 @@ using UnityEngine.Audio;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DG.Tweening;
 [System.Serializable]
 public class Sound
 {
@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     public float masterVolume;
     //AudioManager
-
+    
     void Awake()
     {
         if (instance == null)
@@ -65,6 +65,7 @@ public class AudioManager : MonoBehaviour
         s.source.volume = s.volume;
         s.source.Play();
     }
+    
     public void OnMasterVolumeChanged()
     {
         if(scrollBar != null)

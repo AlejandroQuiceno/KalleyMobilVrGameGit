@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
     public bool SwordTriggered { get => swordTriggered; set => swordTriggered = value; }
     public bool NameFieldEnter { get => nameFieldEnter; set => nameFieldEnter = value; }
 
+    public int quiestionAmount;
     private SpawnerScript spawner;
 
     private ProgressBar progressBar;
@@ -94,6 +95,8 @@ public class GameManager : Singleton<GameManager>
         OnGameStateChanged?.Invoke(currentGameState);
         uIManager.AnimateCanvasGroupOut(canvasIndex);
         progressBar.Enable(true);
+        progressBar.InicitialFill();
+        yield return new WaitForSeconds(5f);
         canvasIndex++;
         QuestionManager questionManager = QuestionManager.GetInstance();
         do
@@ -110,9 +113,17 @@ public class GameManager : Singleton<GameManager>
             feedbackAnimation.ShowCorrectAnswers();
             yield return new WaitForSeconds(6f);
             uIManager.AnimateCanvasGroupOut(canvasIndex);
-            progressBar.IncreaseFill();
+            if(questionManager.currentQuestionIndex+1 < quiestionAmount)
+            {
+                progressBar.IncreaseFill();
+            }
+            else
+            {
+                progressBar.Enable(false);
+            }
+            yield return new WaitForSeconds(5f);
             questionManager.NextQuestion();
-        } while (questionManager.currentQuestionIndex <1);//questionManager.questions.Count >= questionManager.currentQuestionIndex
+        } while (questionManager.currentQuestionIndex < quiestionAmount);//questionManager.questions.Count >= questionManager.currentQuestionIndex
         uIManager.AnimateCanvasGroupOut(canvasIndex);
         progressBar.Enable(false);
         yield return new WaitForSeconds(2f);

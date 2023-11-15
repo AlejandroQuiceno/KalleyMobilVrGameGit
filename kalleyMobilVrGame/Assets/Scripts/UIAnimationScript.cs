@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class UIAnimationScript : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
-    
+    public bool dontScale;
     public float duration;
     public Ease ease;
     public float positionOffset = 600;
@@ -27,6 +27,10 @@ public class UIAnimationScript : MonoBehaviour
     {
         RectTransform groupRect = canvasGroup.GetComponent<RectTransform>();
         Vector3 scale = groupRect.localScale;
+        if (scale.magnitude < new Vector3(100, 100, 100).magnitude && !dontScale)
+        {
+            scale = new Vector3(100, 100, 100);
+        }
         groupRect.localScale = scale * 0.2f;
         canvasGroup.alpha = 0;
         Vector2 anchoredPosition = groupRect.anchoredPosition;
@@ -84,8 +88,10 @@ public class UIAnimationScript : MonoBehaviour
         }
         //AnimateChildrenOut(anchoredPosition);
         groupRect.DOLocalMove(anchoredPosition, duration + 0.3f).SetEase(ease);
+        groupRect.DOScale(scale, 0).SetDelay(duration * 2); // reset the scale after the tween
         groupRect.DOScale(scale*0.2f, duration ).SetEase(ease);
         canvasGroup.DOFade(0, duration - 0.5f).SetEase(ease);
+        
         AudioManager.instance.Play("UIwhoosh");
     }
     /*
